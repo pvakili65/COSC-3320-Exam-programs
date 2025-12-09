@@ -1,0 +1,44 @@
+Parameters:
+-Page = 512 words
+-Active memory size = 512
+-All 2d arrays are of size (1:1024),(1:1024)
+-Each array element occupies 1 word
+-Arrays are mapped in row major order
+Function:
+for(int i=1; i<=1024; i++){
+    for(int j=1; j<=1024; j++){
+        A[j,i]=A[j,i]*B[i,j];
+    }
+}
+Solution:
+-Size of each array = 1024
+-for each full j loop:
+    anything that uses j for the row parameter will have 1024 reads and/or writes
+    anything that uses i for the row parameter will have 2 reads and/or writes because each row contains 1024 words,
+        but a page can only contain 512 words (1024/512=2)
+- Solution:
+    For each full j loop, 1024 writes for A, 1024 reads from A, 2 reads for B; in total 2050 reads/writes
+    Now factor in the full i loop:
+        1024* (2050 reads/writes) = 2099200 total page transfers
+    
+
+
+Another Example:
+Parameters:
+-page = 128 words
+-memory set size = 256
+-Array sizes = 512
+-Arrays are mapped in column major order
+for(int i=1;i<=512;i++){
+    for(int j=1;j<=512;j++){
+        A[i,j] = A[i,j]*B[512-i+1,j];
+    }
+}
+
+Solution:
+-Size of each array = 512
+-For each full j loop:
+    512 writes for A, 512 reads for A, 512 reads for B
+    1536 total reads/writes per full j loop
+-factor in full i loop:
+    512* (1536 reads/writes per full j loop) = 786432 total page transfers

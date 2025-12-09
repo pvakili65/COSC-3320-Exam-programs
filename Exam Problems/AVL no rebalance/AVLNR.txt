@@ -1,0 +1,15 @@
+For any height h, build a perfect binary tree (completely full at every level) and delete any leaf node.
+Why This Works
+In a perfect binary tree of height h:
+
+Every internal node has exactly two children
+Every leaf is at the same depth
+Every node has a balance factor of 0 (left and right subtrees have equal height)
+
+When you delete a leaf x:
+
+The leaf is simply removed (no successor/predecessor complications)
+Its parent's balance factor changes from 0 to ±1
+A balance factor of ±1 is still valid for AVL trees—no rotation needed
+The parent's height doesn't change (its other subtree still has the same height)
+Since the parent's height is unchanged, no ancestors are affected

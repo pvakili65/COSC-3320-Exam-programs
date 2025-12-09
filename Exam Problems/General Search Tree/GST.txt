@@ -1,0 +1,42 @@
+General search tree in ascending order: 
+void PrintInOrder(Node* node){
+    if(node==nullptr){
+        return;
+    }
+    PrintInOrder(node->left);
+    cout<<node->value<<endl;
+    PrintInOrder(node->right);
+}
+
+General search tree in descending order:
+void PrintReverseOrder(Node* node){
+    if(node==nullptr){
+        return;
+    }
+    PrintReverseOrder(node->right);
+    cout<<node->value<<endl;
+    PrintReverseOrder(node->left);
+}
+
+General search tree in pre order:
+void PrintPreOrder(Node* node){
+    if(node==nullptr){
+        return;
+    }
+    cout<<node->value<<endl;
+    PrintPreOrder(node->left);
+    PrintPreOrder(node->right);
+}
+
+General search tree in post order:
+void PrintPostOrder(Node* node){
+    if(node==nullptr){
+        return;
+    }
+    PrintPostOrder(node->left);
+    PrintPostOrder(node->right);
+    cout<<node->value<<endl;
+}
+
+Time complexity: Best/Worst: O(n), will visit every node exactly once
+Space complexity: depends on height of tree, best case: O(log(n)), worst case: O(n) (Tree is essentially a linked list)
