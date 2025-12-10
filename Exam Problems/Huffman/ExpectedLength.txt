@@ -1,0 +1,18 @@
+How to get expected length of huffman code:
+letter frequencies:
+a: 1/40, b: 2/40, c: 3/40, d: 4/40, e: 5/40, f: 6/40, g: 8/40, h:11/40
+
+codes for each letter:
+a: 11010 length=5
+b: 11011 length=5
+c: 1100  length=4
+d: 010   length=3
+e: 011   length=3
+f: 111   length=3
+g: 00    length=2
+h: 10    length=2
+
+find the sum of all the letter lengths multiplied by the numerator of their frequencies, and then take that sum
+and divide it by the total number of letters (40 in this case)
+
+expected length = [(5*1) + (5*2) + (4*3) + (3*4) + (3*5) + (3*6) + (2*8) + (2*11)] / 40 = 2.75 
