@@ -1,0 +1,33 @@
+Consider the following function, CheckProds(A,B,C) where A is 2D array of size (1:n, 1:n), n a positive integer. 
+The body of CheckProds implements the following computations
+B[i] = A[i,1]*A[i,2]*...*A[i,n]
+C[i] = A[1,i]*A[2,i]*...*A[n,i]
+A) Give the complete function, CheckProds(A,B,C), including in particular the code of the function body
+    and the method of passing the three parameters
+B) Determine for your function its time and space complexity (Space complexity is the amount of space of memory required by the function
+    in addition to the space for the actual parameters)
+
+Solution(write everything down):
+A)
+//Pass all parameters by reference to save space and time
+//assume all elements are integers
+void CheckProds(A,B,C){
+    int B'[n];
+    int C'[n];
+    for(int i=0;i<n;i++){
+        B'[i]=1; //dont write these 2 comments down
+        C'[i]=1; //if it is addition, initialize to 0 instead
+        for(int j=0;j<n;j++){
+            B'[i]=B'[i]*A[i,j];
+            C'[i]=C'[i]*A[j,i];
+        }
+    }
+    for(int i=0;i<n;i++){
+        B[i]=B'[i];
+        C[i]=C'[i];
+    }
+}
+
+B)There are 2 1D arrays the get allocated in this function which makes the space complexity O(n)
+    There is an embedded for loop (a for loop inside a for loop) each performing n iterations, which makes the 
+    time complexity O(n^2)
