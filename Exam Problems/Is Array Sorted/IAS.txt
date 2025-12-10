@@ -1,0 +1,47 @@
+The Question: What's the minimum number of comparisons needed in the worst case to determine that an array is NOT sorted?
+Key Insight: To prove an array is sorted, you'd need to verify that every adjacent pair is in order, which requires n-1 comparisons.
+But to prove an array is NOT sorted, you only need to find one violation - a single pair where arr[i] > arr[i+1].
+Worst Case Analysis:
+In the worst case, the array could be "almost sorted" with the violation at the very end:
+[1, 2, 3, 4, 5, 6, ..., n-1, n-2, n]
+                        ↑
+                    violation here
+Or the violation could be anywhere, and you happen to check it last.
+If you're checking pairs in order (0-1, 1-2, 2-3, ...), the worst case is when:
+
+The first n-2 pairs are all in order
+Only the last pair (n-2, n-1) reveals the violation
+
+So you'd need to check n-1 comparisons before finding the violation.
+But wait - can we do better?
+No matter what order you check pairs, an adversary could always place the single violation in the last pair you check. So in the worst case, you might need to check all n-1 adjacent pairs.
+Answer: n-1 comparisons
+In the worst case, you need n-1 comparisons to conclude an array is not sorted, because:
+
+There are n-1 adjacent pairs to check
+The violation could be in whichever pair you check last
+You cannot conclude "not sorted" until you actually find a violation
+
+Note: The best case is just 1 comparison (if you get lucky and the first pair you check is out of order). But the worst case requires checking up to n-1 pairs.
+
+
+The Question: What's the minimum number of comparisons needed in the best case to determine that an array IS sorted?
+Key Insight: To prove an array is sorted, you must verify that every adjacent pair is in order. There's no shortcut - you can't skip any pair.
+Why? Because even if you check n-2 pairs and they're all in order, the one pair you didn't check could be the violation:
+[1, 2, 3, 4, 5, 6, 7]
+         ↑
+   If you skip checking (3,4), 
+   the array could actually be [1, 2, 3, 99, 5, 6, 7]
+Answer: n-1 comparisons
+Even in the best case, you need n-1 comparisons to conclude an array is sorted, because:
+
+There are n-1 adjacent pairs
+Every single pair must be verified
+Skipping any pair means you can't guarantee the array is sorted
+
+Summary:
+ConclusionBest CaseWorst CaseArray is NOT sorted1n-1Array IS sortedn-1n-1
+The asymmetry makes sense:
+
+Not sorted: You just need to find ONE violation (lucky = 1, unlucky = n-1)
+Sorted: You must verify ALL pairs, no exceptions (always n-1)
